@@ -18,6 +18,42 @@ const Sidebar = () => {
         <span className="mr-2 text-xl">+</span> New Chat
       </button>
       {/* Search Conversations */}
+      <div className="flex items-center gap-2 p-3 mt-4 border border-gray-400 dark:border-white/20 rounded-md">
+        <img src={assets.search_icon} className="w-4 not-dark:invert" alt="" />
+        <input
+          onChange={(e) => setSearch(e.target.value)}
+          value={search}
+          type="text"
+          placeholder="Search conversations"
+          className="text-xs placeholder:text-gray-400 outline-none"
+        />
+      </div>
+      {/* Recent Chats */}
+      {chats.length > 0 && <p className="mt-4 text-sm">Recent Chats</p>}
+      <div className="flex-1 overflow-y-scroll mt-3 text-sm space-y-3">
+        {chats
+          .filter((chat) =>
+            chat.messages[0]
+              ? chat.messages[0]?.content
+                  .toLowerCase()
+                  .includes(search.toLowerCase())
+              : chat.name.toLowerCase().includes(search.toLowerCase())
+          )
+          .map((chat) => (
+            <div
+              key={chat._id}
+              className="p-2 px-4 dark:bg-[#57317c]/10 border border-gray-300 dark:border-[#80609f]/15 rounded-md cursor-pointer flex justify-between group"
+            >
+              <div>
+                <p className="truncate w-full">
+                  {chat.messages > 0
+                    ? chat.messages[0].content.slice(0, 32)
+                    : chat.name}
+                </p>
+              </div>
+            </div>
+          ))}
+      </div>
     </div>
   );
 };
