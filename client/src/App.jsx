@@ -8,7 +8,7 @@ import Community from "./pages/Community";
 const App = () => {
   return (
     <>
-      <div>
+      <div className="flex h-screen w-screen">
         <Sidebar />
         <Routes>
           <Route path="/" element={<ChatBox />} />
