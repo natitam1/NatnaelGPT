@@ -1,7 +1,14 @@
+import { Sidebar } from "lucide-react";
 import React from "react";
 
 const App = () => {
-  return <div className="">App</div>;
+  return (
+    <>
+      <div>
+        <Sidebar />
+      </div>
+    </>
+  );
 };
 
 export default App;
