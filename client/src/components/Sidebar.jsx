@@ -4,7 +4,9 @@ import { useAppContext } from "../context/AppContext";
 const Sidebar = () => {
   const { chats, setSelectedChat, theme, setTheme, user } = useAppContext();
   const [search, setSearch] = useState("");
-  return <div>Sidebar</div>;
+  return (
+    <div className="flex flex-col h-screen min-w-72 p-5 dark:bg-gradient-to-b from-[#242124]/30 to-[#000000]/30 border-b border-[#80609f] backdrop-blur-3xl transition-all duration-500 max-md:absolute left-0 z-1"></div>
+  );
 };
 
 export default Sidebar;
