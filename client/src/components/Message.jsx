@@ -15,7 +15,20 @@ const Message = ({ message }) => {
           <img src={assets.user_icon} className="w-8 rounded-full" alt="" />
         </div>
       ) : (
-        <div></div>
+        <div className="inline-flex flex-col gap-2 p-2 px-4 max-w-2xl bg-primary/20 dark:bg-[#573a7c]/30 border border-[#80609f]/30 rounded-md my-4">
+          {message.isImage ? (
+            <img
+              src={message.content}
+              className="w-full max-w-md mt-2 rounded-md"
+              alt=""
+            />
+          ) : (
+            <div className="text-sm dark:text-primary reset-tw">
+              {message.content}
+            </div>
+          )}
+          <span>{message.timestamp}</span>
+        </div>
       )}
     </div>
   );
