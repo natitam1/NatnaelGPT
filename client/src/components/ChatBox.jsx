@@ -6,7 +6,7 @@ import Message from "./Message";
 const ChatBox = () => {
   const { selectedChat, theme } = useAppContext();
   const [messages, setMessages] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (selectedChat) {
@@ -33,6 +33,14 @@ const ChatBox = () => {
         {messages.map((message, index) => (
           <Message key={index} message={message} />
         ))}
+        {/* Three Dots Loading */}
+        {loading && (
+          <div className="loader flex items-center gap-1.5">
+            <div className="w-1.5 h-1.5 rounded-full bg-gray-500 dark:bg-white animate-bounce"></div>
+            <div className="w-1.5 h-1.5 rounded-full bg-gray-500 dark:bg-white animate-bounce"></div>
+            <div className="w-1.5 h-1.5 rounded-full bg-gray-500 dark:bg-white animate-bounce"></div>
+          </div>
+        )}
       </div>
     </div>
   );
