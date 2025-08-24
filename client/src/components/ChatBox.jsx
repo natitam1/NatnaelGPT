@@ -7,6 +7,13 @@ const ChatBox = () => {
   const { selectedChat, theme } = useAppContext();
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [prompt, setPrompt] = useState("");
+  const [mode, setMode] = useState("text");
+  const [isPublished, setIsPublished] = useState(false);
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+  };
 
   useEffect(() => {
     if (selectedChat) {
