@@ -1,5 +1,6 @@
 import React from "react";
 import { assets } from "../assets/assets";
+import moment from "moment";
 
 const Message = ({ message }) => {
   return (
@@ -9,7 +10,7 @@ const Message = ({ message }) => {
           <div className="flex flex-col gap-2 p-2 px-4 bg-slate-50 dark:bg-[#57317c]/30 border border-[#80609f]/30 rounded-md max-w-2xl">
             <p className="text-sm dark:text-primary">{message.content}</p>
             <span className="text-xs text-gray-400 dark:text-[#b1a6c0]">
-              {message.timestamp}
+              {moment(message.timestamp).fromNow()}
             </span>
           </div>
           <img src={assets.user_icon} className="w-8 rounded-full" alt="" />
@@ -27,7 +28,9 @@ const Message = ({ message }) => {
               {message.content}
             </div>
           )}
-          <span>{message.timestamp}</span>
+          <span className="text-xs text-gray-400 dark:text-[#b1a6c0]">
+            {moment(message.timestamp).fromNow()}
+          </span>
         </div>
       )}
     </div>

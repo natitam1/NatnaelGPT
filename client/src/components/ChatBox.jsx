@@ -9,7 +9,9 @@ const ChatBox = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setMessages(selectedChat.messages);
+    if (selectedChat) {
+      setMessages(selectedChat.messages);
+    }
   }, [selectedChat]);
 
   return (
