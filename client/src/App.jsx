@@ -5,6 +5,8 @@ import Credits from "./pages/Credits";
 import Community from "./pages/Community";
 import Sidebar from "./components/Sidebar";
 import { assets } from "./assets/assets";
+import "./assets/prism.css";
+import Prism from "prismjs";
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
