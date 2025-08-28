@@ -8,7 +8,7 @@ export const textMessageController = async (req, res) => {
   try {
     const userId = req.user._id;
     // Check credits
-    if (req.user.credits < 2) {
+    if (req.user.credits < 1) {
       return res.json({ success: false, message: "Insufficient credits" });
     }
     const { chatId, prompt } = req.body;
