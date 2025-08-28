@@ -1,5 +1,7 @@
+import imagekit from "../configs/imagekit.js";
 import Chat from "../models/Chat.js";
 import User from "../models/user.js";
+import axios from "axios";
 
 // Text-based AI Chat Message Controller
 export const textMessageController = async (req, res) => {
@@ -55,6 +57,39 @@ export const imageMessageController = async (req, res) => {
       timestamp: Date.now(),
       isImage: false,
     });
+
+    // Encode the prompt
+    const generatedImageUrl = `${
+      process.env.IMAGEKIT_URL_ENDPOINT
+    }/ik-genimg-prompt-${encodedPrompt}/quickgpt/${Date.now()}.png?tr=w-800,h-800`;
+    // Trigger generation by fetching from ImageKit
+    const aiImageResponse = await axios.get(generatedImageUrl, {
+      responseType: "arraybuffer",
+    });
+
+    // Convert to Base64
+    const base64Image = `data:image/png;base64,${Buffer.from(
+      aiImageResponse.data
+    ).toString("base64")}`;
+    // Upload to ImageKit Media Library
+    const uploadResponse = await imagekit.upload({
+      file: base64Image,
+      fileName: `${Date.now()}.png`,
+      folder: "quickgpt",
+    });
+
+    const reply = {
+      role: "assistant",
+      isImage: true,
+      timestamp: Date.now(),
+      content: uploadResponse.url,
+      isPublished,
+    };
+
+    res.json({ success: true, message: reply });
+    chat.messages.push(reply);
+    await chat.save();
+    await User.updateOne({ _id: userId }, { $inc: { credits: -2 } });
   } catch (error) {
     res.json({ success: false, message: error.message });
   }
